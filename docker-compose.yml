@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  frontend:
+    image: php:7.3-apache
+    container_name: phpRestFrontEnd
+    volumes:
+      - ./src:/var/www/html/
+      - ./php.ini:/usr/local/etc/php/conf.d/30-custom.ini
+    ports:
+      - 80:80
+  backend:
+    image: php:7.3-apache
+    container_name: phpRestBackEnd
+    volumes:
+      - ./api:/var/www/html/
+    ports:
+      - 3000:80
