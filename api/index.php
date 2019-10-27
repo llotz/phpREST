@@ -1,6 +1,6 @@
 <?php
 header("Content-Type:application/json");
-if(isset($_GET["name"]))
+if(isset($_GET["name"]) && $_GET["name"]!="")
 {
     http_response_code(200);
 ?>
@@ -14,7 +14,8 @@ if(isset($_GET["name"]))
 }
 else{
     ?>
-{"Error": "No data given"}
+{"Error": {"Message": "No data given"}}
     <?
+    http_response_code(204);
 }
 ?> 

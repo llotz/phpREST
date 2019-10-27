@@ -21,7 +21,7 @@ if(isset($_POST['submit'])) {
   $response = curl_exec($client);
   $data = json_decode($response);
   if(property_exists($data, "Error"))
-    $output="Error: ".$data->Error;
+    $output="Error: ".$data->Error->Message;
   else
     $output="Name: ".$data->Person->Name."<br>Age: ".$data->Person->Age;
 
@@ -32,7 +32,7 @@ if(isset($_POST['submit'])) {
     <form class="form-inline" action="" method="POST">
       <div class="form-group">
         <label for="name">Search Person</label>
-        <input type="text" name="name" class="form-control" placeholder="Enter Person Name" required/>
+        <input type="text" name="name" class="form-control" placeholder="Enter Person Name" />
       </div>
       <button type="submit" name="submit" class="btn btn-default">Find</button>
     </form>
