@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   frontend:
-    image: php:7.3-apache
+    image: php:7.4-apache
     container_name: phpRestFrontEnd
     volumes:
       - ./src:/var/www/html/
@@ -9,7 +9,7 @@ services:
     ports:
       - 80:80
   backend:
-    image: php:7.3-apache
+    image: php:7.4-apache
     container_name: phpRestBackEnd
     volumes:
       - ./api:/var/www/html/
