@@ -1,4 +1,5 @@
 <?
+include_once("RestClient.php");
 ob_start (); // start buffering
 ?>
 
@@ -13,23 +14,26 @@ ob_start (); // start buffering
 
 <?
 
-if(isset($_POST['submit'])) {
-  $name = $_POST['name'];
-  $url = "http://phpRestBackEnd/?name=".$name;
-  $client = curl_init($url);
-  curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
-  $response = curl_exec($client);
-  $data = json_decode($response);
-  if(property_exists($data, "Error"))
-    $output="Error: ".$data->Error->Message;
+if(isset($_GET["name"])) {
+  $name = $_GET['name'];
+
+  $client = new RestClient("http://phpRestBackEnd/");
+  //$client->AddBaseAuthCredentials("test", "test");
+  $client->AddJsonBody(array('name'=>"$name"));
+  $client->SetRequestMethod("POST");
+  $result = $client->Request("");
+  
+  $data = json_decode($result);
+  if(property_exists($data, "status") && $data->status == "error")
+    $output="Error: ".$data->message;
   else
-    $output="Name: ".$data->Person->Name."<br>Age: ".$data->Person->Age;
+    $output="Name: ".$data->name."<br>Age: ".$data->age;
 
 } 
 ?>
 
 <div class="content">
-    <form class="form-inline" action="" method="POST">
+    <form class="form-inline" action="" method="GET">
       <div class="form-group">
         <label for="name">Search Person</label>
         <input type="text" name="name" class="form-control" placeholder="Enter Person Name" />
