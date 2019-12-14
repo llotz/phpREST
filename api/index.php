@@ -10,7 +10,7 @@ $apis = scandir("api");
 if(count($apis) > 2){
 	for($i = 2; $i < count($apis); $i++){
 		$apiName = $apis[$i];
-		echo "<p><a href='$baseLink/api/$apiName'>$baseLink/api/$apiName/</a></p>";
+		echo "<p><a href='$baseLink/api/$apiName'>/api/$apiName/</a></p>";
 	}
 }
 
