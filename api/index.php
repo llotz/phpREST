@@ -1,6 +1,6 @@
 <h2>phpREST</h2>
-<p>This is a API library implemented in php.</p>
-<p>API description will bee added soon.</p>
+<p>This is an API library implemented in php.</p>
+<p>API description and automatic endpoint detection (request methods) will be added soon.</p>
 
 <h2>Endpoints</h2>
 

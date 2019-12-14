@@ -36,7 +36,7 @@ if(isset($_GET["name"])) {
     <form class="form-inline" action="" method="GET">
       <div class="form-group">
         <label for="name">Search Person</label>
-        <input type="text" name="name" class="form-control" placeholder="Enter Person Name" />
+        <input type="text" name="name" class="form-control" placeholder="Enter Person Name" value=<?=$_GET['name'];?> />
       </div>
       <button type="submit" name="submit" class="btn btn-default">Find</button>
     </form>
