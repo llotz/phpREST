@@ -38,7 +38,7 @@ if(isset($_GET["name"])) {
         <label for="name">Search Person</label>
         <input type="text" name="name" class="form-control" placeholder="Enter Person Name" value=<?=$_GET['name'];?> />
       </div>
-      <button type="submit" name="submit" class="btn btn-default">Find</button>
+      <button type="submit" class="btn btn-default">Find</button>
     </form>
 </div>
 
