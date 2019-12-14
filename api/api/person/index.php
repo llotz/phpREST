@@ -18,6 +18,12 @@ class PersonAPI extends Api{
       $this->SendError("Property 'name' not set!");
       die();
     }
+
+    if($content->name == ""){
+      $this->SendError("Property 'name' has no value!");
+      die();
+    }
+
     $person = new Person();
     $person->name = $content->name;
     $person->age = rand(20, 80);

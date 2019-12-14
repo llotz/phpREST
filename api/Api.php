@@ -87,7 +87,7 @@ class Api {
 
   public function SendError($message, $statusCode = 400){
     $status = new Status();
-    $status->status = "Error";
+    $status->status = "error";
     $status->message = $message;
     http_response_code($statusCode);
     echo json_encode($status);

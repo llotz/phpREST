@@ -7,8 +7,8 @@ class RestClient{
   private $request;
 
   function __construct($baseUrl){
-    if(!$this->endsWith($baseUrl, "/"))
-      $baseUrl .= "/";
+    if($this->endsWith($baseUrl, "/"))
+      $baseUrl = substr(0, -1); // truncate last char
     $this->baseUrl = $baseUrl;
 
     $this->ResetRequest();
@@ -35,6 +35,11 @@ class RestClient{
   }
 
   public function Request($endpoint){
+    if(!$this->startsWith($endpoint, "/"))
+      $endpoint = "/".$endpoint;
+    if(!$this->endsWith($endpoint, "/"))
+      $endpoint .= "/";
+      
     $url = $this->baseUrl . $endpoint;
     curl_setopt($this->request, CURLOPT_URL, $url);
     curl_setopt($this->request, CURLOPT_RETURNTRANSFER, true);
@@ -63,6 +68,12 @@ class RestClient{
         return true;
     }
     return (substr($haystack, -$length) === $needle);
+  }
+
+  function startsWith($haystack, $needle)
+  {
+      $length = strlen($needle);
+      return (substr($haystack, 0, $length) === $needle);
   }
 
 }

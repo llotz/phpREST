@@ -17,11 +17,11 @@ ob_start (); // start buffering
 if(isset($_GET["name"])) {
   $name = $_GET['name'];
 
-  $client = new RestClient("http://phpRestBackEnd/");
-  //$client->AddBaseAuthCredentials("test", "test");
+  $client = new RestClient("http://phpRestBackEnd/api");
+  $client->AddBaseAuthCredentials("test", "password");
   $client->AddJsonBody(array('name'=>"$name"));
   $client->SetRequestMethod("POST");
-  $result = $client->Request("");
+  $result = $client->Request("/person/");
   
   $data = json_decode($result);
   if(property_exists($data, "status") && $data->status == "error")
