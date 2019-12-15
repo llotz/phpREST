@@ -1,10 +1,10 @@
 # phpREST
 This is a leightweight API written in plain PHP. It's held simple and highly extensible.
-There is an __API__ and an __RestClient__, both used to do simple calls.
+There is an __API__ and a __RestClient__, both used to process simple REST calls.
 
 ## Features API
 - Request Method differentiation
-- Basic Auth for endpoints 
+- __Basic Auth__ for endpoints 
   - different credentials for each endpoint
 - Fast implementation of endpoints by extending base API class
 - Request body processing
@@ -12,9 +12,9 @@ There is an __API__ and an __RestClient__, both used to do simple calls.
 
 ## Features RestClient
 - Request Method defining
-- Basic Auth
-- JSON body sending
-- Support for multiple endpoints
+- __Basic Auth__
+- JSON body submitting
+- Support for multiple endpoints from single instance
 
 ## How to run?
 
