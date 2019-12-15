@@ -34,3 +34,7 @@ will take you to the API endpoint overview
 >localhost:3000/api/test
 
 will give you a json example of an endpoint answer
+
+>localhost:3000/api/persons
+
+will give you a 403 response cause this endpoint requires user validation
