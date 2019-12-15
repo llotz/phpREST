@@ -7,6 +7,7 @@ There is an __API__ and an __RestClient__, both used to do simple calls.
 - Basic Auth for endpoints 
   - different credentials for each endpoint
 - Fast implementation of endpoints by extending base API class
+- Request body processing
 
 
 ## Features RestClient
@@ -37,4 +38,4 @@ will give you a json example of an endpoint answer
 
 >localhost:3000/api/persons
 
-will give you a 403 response cause this endpoint requires user validation
+will give you a 403 response cause this endpoint requires basic user auth
