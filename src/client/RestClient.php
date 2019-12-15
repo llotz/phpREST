@@ -46,7 +46,6 @@ class RestClient{
     $header = $this->GetAuthInfo();
     curl_setopt($this->request, CURLOPT_HTTPHEADER, array('Content-Type:application/json', $header));
     $response = curl_exec($this->request);
-    //print_r($response);
     curl_close($this->request);
     $this->ResetRequest();
     return $response;

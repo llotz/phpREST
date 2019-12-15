@@ -8,26 +8,24 @@ class PersonAPI extends Api{
 
   public function GET($content){
     $person = new Person();
-    $person->name="Lukas";
-    $person->age=28;
-    echo json_encode($person);
+    $person->name="Bob";
+    $person->age=rand(18, 101);
+    return json_encode($person);
   }
 
   public function POST($content){
     if(!property_exists($content, "name")){
-      $this->SendError("Property 'name' not set!");
-      die();
+      return $this->SendError("Property 'name' not set!");
     }
 
     if($content->name == ""){
-      $this->SendError("Property 'name' has no value!");
-      die();
+      return $this->SendError("Property 'name' has no value!");
     }
 
     $person = new Person();
     $person->name = $content->name;
     $person->age = rand(20, 80);
-    echo json_encode($person);
+    return json_encode($person);
   }
 }
 

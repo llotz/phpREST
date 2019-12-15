@@ -8,43 +8,52 @@ class Api {
   // Base class for all API implementations
   public function HandleRequest(){
     header("Content-Type:application/json");
+    $responseBody = "";
 
     $credentials = $this->GetAuthorization();
-    if(!$this->IsAuthorized($credentials))
-    {
-      $this->SendNotAuthorized();
-      die();
+    if(!$this->IsAuthorized($credentials)){
+      $responseBody = $this->SendNotAuthorized();
+    }else{
+      $input = $this->GetJsonBodyContent();
+      $method = $_SERVER['REQUEST_METHOD'];
+      if($method == "GET"){
+        $responseBody = $this->GET($input);
+      }else if($method == "POST"){
+        $responseBody = $this->POST($input);
+      }else if($method == "PUT"){
+        $responseBody = $this->PUT($input);
+      }
     }
-
-    $jsonBody = file_get_contents('php://input');
-    $input = "";
-
-    try{
-      $input = json_decode($jsonBody);
-    }catch(Exception $e){
-      $this->SendError($e, 400);
-    }
-
-    $method = $_SERVER['REQUEST_METHOD'];
-    if($method == "GET"){
-      $this->GET($input);
-    }else if($method == "POST"){
-      $this->POST($input);
-    }else if($method == "PUT"){
-      $this->PUT($input);
-    }
+    $this->SendAnswer($responseBody);
   }
 
   public function GET($input){
-    $this->SendNotImplementedStatus();
+    return $this->SendNotImplementedStatus();
   }
 
   public function POST($input){
-    $this->SendNotImplementedStatus();
+    return $this->SendNotImplementedStatus();
   }
 
   public function PUT($input){
-    $this->SendNotImplementedStatus();
+    return $this->SendNotImplementedStatus();
+  }
+
+  public function SendAnswer($body){
+    echo $body;
+  }
+
+  function GetJsonBodyContent(){
+    $input = "";
+    try{
+      $jsonBody = file_get_contents('php://input');
+      $input = json_decode($jsonBody);
+    }catch(Exception $e){
+      $this->SendError($e, 400);
+      die();
+    }
+    if(!isset($input)) $input = "";
+    return $input;
   }
 
   function IsAuthorized($credentials){
@@ -77,14 +86,15 @@ class Api {
       //$username = $credentials[0];
       //$password = $credentials[1];
     }
+    return "";
   }
 
   private function SendNotImplementedStatus(){
-    $this->SendError("This endpoint is not implemented.");
+    return $this->SendError("This endpoint is not implemented.");
   }
 
   private function SendNotAuthorized(){
-    $this->SendError("You're not authorized to use this endpoint", 403);
+    return $this->SendError("You're not authorized to use this endpoint", 403);
   }
 
   public function SendError($message, $statusCode = 400){
@@ -92,7 +102,7 @@ class Api {
     $status->status = "Error";
     $status->message = $message;
     http_response_code($statusCode);
-    echo json_encode($status);
+    return json_encode($status);
   }
 
   public function SendOK($message, $statusCode = 200){
@@ -100,7 +110,7 @@ class Api {
     $status->status = "OK";
     $status->message = $message;
     http_response_code($statusCode);
-    echo json_encode($status);
+    return json_encode($status);
   }
 
 }
