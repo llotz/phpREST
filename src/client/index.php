@@ -24,7 +24,7 @@ if(isset($_GET["name"])) {
   $result = $client->Request("/person/");
   
   $data = json_decode($result);
-  if(property_exists($data, "status") && $data->status == "error")
+  if(property_exists($data, "status") && $data->status == "Error")
     $output="Error: ".$data->message;
   else
     $output="Name: ".$data->name."<br>Age: ".$data->age;

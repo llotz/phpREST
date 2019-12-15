@@ -35,19 +35,22 @@ class Api {
     }
   }
 
-  public function GET($content){
+  public function GET($input){
     $this->SendNotImplementedStatus();
   }
 
-  public function POST($content){
+  public function POST($input){
     $this->SendNotImplementedStatus();
   }
 
-  public function PUT($content){
+  public function PUT($input){
     $this->SendNotImplementedStatus();
   }
 
   function IsAuthorized($credentials){
+    if($this->username =="" && $this->password=="")
+      return true;
+
     if(is_array($credentials)){
       if($this->username == $credentials[0] &&
         $this->password == $credentials[1])
@@ -73,7 +76,6 @@ class Api {
       return $credentials;
       //$username = $credentials[0];
       //$password = $credentials[1];
-      //echo "User: $username, Pass: $password";
     }
   }
 
@@ -87,7 +89,15 @@ class Api {
 
   public function SendError($message, $statusCode = 400){
     $status = new Status();
-    $status->status = "error";
+    $status->status = "Error";
+    $status->message = $message;
+    http_response_code($statusCode);
+    echo json_encode($status);
+  }
+
+  public function SendOK($message, $statusCode = 200){
+    $status = new Status();
+    $status->status = "OK";
     $status->message = $message;
     http_response_code($statusCode);
     echo json_encode($status);

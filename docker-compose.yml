@@ -13,5 +13,6 @@ services:
     container_name: phpRestBackEnd
     volumes:
       - ./src/api:/var/www/html/
+
     ports:
       - 3000:80
