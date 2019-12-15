@@ -1,6 +1,6 @@
 <?
-include_once("../../Api.php");
-include_once("models/Person.php");
+require_once("../../Api.php");
+require_once("models/Person.php");
 
 class PersonAPI extends Api{
   public $username = "test";
@@ -15,11 +15,11 @@ class PersonAPI extends Api{
 
   public function POST($content){
     if(!property_exists($content, "name")){
-      return $this->SendError("Property 'name' not set!");
+      return $this->GetError("Property 'name' not set!");
     }
 
     if($content->name == ""){
-      return $this->SendError("Property 'name' has no value!");
+      return $this->GetError("Property 'name' has no value!");
     }
 
     $person = new Person();

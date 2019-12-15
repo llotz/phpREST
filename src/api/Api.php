@@ -28,15 +28,15 @@ class Api {
   }
 
   public function GET($input){
-    return $this->SendNotImplementedStatus();
+    return $this->GetNotImplementedStatus();
   }
 
   public function POST($input){
-    return $this->SendNotImplementedStatus();
+    return $this->GetNotImplementedStatus();
   }
 
   public function PUT($input){
-    return $this->SendNotImplementedStatus();
+    return $this->GetNotImplementedStatus();
   }
 
   public function SendAnswer($body){
@@ -89,15 +89,15 @@ class Api {
     return "";
   }
 
-  private function SendNotImplementedStatus(){
-    return $this->SendError("This endpoint is not implemented.");
+  private function GetNotImplementedStatus(){
+    return $this->GetError("This endpoint is not implemented.");
   }
 
-  private function SendNotAuthorized(){
-    return $this->SendError("You're not authorized to use this endpoint", 403);
+  private function GetNotAuthorized(){
+    return $this->GetError("You're not authorized to use this endpoint", 403);
   }
 
-  public function SendError($message, $statusCode = 400){
+  public function GetError($message, $statusCode = 400){
     $status = new Status();
     $status->status = "Error";
     $status->message = $message;
@@ -105,7 +105,7 @@ class Api {
     return json_encode($status);
   }
 
-  public function SendOK($message, $statusCode = 200){
+  public function GetOK($message, $statusCode = 200){
     $status = new Status();
     $status->status = "OK";
     $status->message = $message;
